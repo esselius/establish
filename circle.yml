@@ -1,0 +1,17 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+
+test:
+  override:
+    - make test-full
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - make deploy
