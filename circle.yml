@@ -1,0 +1,13 @@
+machine:
+  services:
+    - docker
+
+test:
+  override:
+    - make test-full
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - make deploy
