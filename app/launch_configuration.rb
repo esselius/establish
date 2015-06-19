@@ -1,9 +1,10 @@
 class LaunchConfiguration
-  attr_reader :name, :ami, :instance_type
+  attr_reader :name, :ami, :instance_type, :user_data
 
-  def initialize(options)
-    @name = options.fetch(:name)
-    @ami = options.fetch(:ami)
-    @instance_type = options.fetch(:instance_type)
+  def initialize(name:, ami:, instance_type:, user_data: nil)
+    @name = name
+    @ami = ami
+    @instance_type = instance_type
+    @user_data = user_data
   end
 end

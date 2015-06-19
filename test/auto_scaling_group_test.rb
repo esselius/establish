@@ -17,13 +17,28 @@ class TestAutoScalingGroup < Minitest::Test
     asg = AutoScalingGroup.new(name: name,
                                minimum: minimum,
                                desired: desired,
-                               maximum: maximum,
-                               launch_configuration: launch_configuration)
+                               maximum: maximum)
 
     assert_equal name, asg.name
     assert_equal minimum, asg.minimum
     assert_equal desired, asg.desired
     assert_equal maximum, asg.maximum
-    assert_equal launch_configuration, asg.launch_configuration
+  end
+
+  def test_lc_is_optional
+    asg = AutoScalingGroup.new(name: name,
+                               minimum: minimum,
+                               desired: desired,
+                               maximum: maximum)
+
+    refute asg.launch_configuration
+
+    asg = AutoScalingGroup.new(name: name,
+                               minimum: minimum,
+                               desired: desired,
+                               maximum: maximum,
+                               launch_configuration: launch_configuration)
+
+    assert asg.launch_configuration
   end
 end

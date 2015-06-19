@@ -1,5 +1,7 @@
 require 'bundler/setup'
 
+require 'ostruct'
+
 require 'minitest'
 require 'minitest/autorun'
 
