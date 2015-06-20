@@ -6,9 +6,9 @@ WORKDIR /app
 
 ENV PATH /app/bin:$PATH
 
-ADD Gemfile /app/
-ADD Gemfile.lock /app/
+COPY Gemfile Gemfile.lock /app/
+COPY vendor /app/vendor
 
-RUN bundle install --deployment
+RUN bundle install --local
 
 ADD . /app
