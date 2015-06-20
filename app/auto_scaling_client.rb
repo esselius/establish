@@ -14,13 +14,22 @@ class AutoScalingClient
     )
   end
 
-  def create_asg(name:, lc_name:, minimum:, desired:, maximum:)
+  def create_asg(name:, lc_name:, minimum:, desired:, maximum:, tags: {})
+    asg_tags = tags.map do |key, value|
+      {
+        key: key,
+        value: value,
+        propagate_at_launch: true
+      }
+    end
+
     client.create_auto_scaling_group(
       auto_scaling_group_name: name,
       launch_configuration_name: lc_name,
       min_size: minimum,
       desired_capacity: desired,
-      max_size: maximum
+      max_size: maximum,
+      tags: asg_tags
     )
   end
 end

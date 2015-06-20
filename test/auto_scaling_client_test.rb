@@ -14,6 +14,11 @@ class TestAutoScalingClient < Minitest::Test
                           lc_name: '123-lc',
                           minimum: 1,
                           desired: 2,
-                          maximum: 3)
+                          maximum: 3,
+                          tags: {
+                            service: 'email',
+                            port: '110'
+                          }
+                         )
   end
 end
