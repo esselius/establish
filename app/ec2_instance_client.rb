@@ -4,21 +4,31 @@ class Ec2InstanceClient
   def find_tags(tags)
     filters = []
 
-    filters + tags.map do |key, value|
+    filters += tags.map do |key, value|
       {
         name: 'tag:' + key.to_s,
         values: [value]
       }
     end
 
-    reservations = client.describe_instances(
+    instance_ids(filters)
+  end
+
+  private
+
+  def reservations(filters)
+    client.describe_instances(
       filters: filters
     )[:reservations]
+  end
 
-    instances = reservations.map do |reservation|
+  def instances(filters)
+    reservations(filters).map do |reservation|
       reservation[:instances]
     end.flatten
+  end
 
-    instances.map(&:instance_id)
+  def instance_ids(filters)
+    instances(filters).map(&:instance_id)
   end
 end

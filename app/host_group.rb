@@ -7,14 +7,7 @@ class HostGroup
   end
 
   def up(client)
-    client.create_lc(name: lc.name,
-                     ami: lc.ami,
-                     instance_type: lc.instance_type)
-
-    client.create_asg(name: asg.name,
-                      lc_name: lc.name,
-                      minimum: asg.minimum,
-                      desired: asg.desired,
-                      maximum: asg.maximum)
+    client.create_lc(lc)
+    client.create_asg(asg)
   end
 end
