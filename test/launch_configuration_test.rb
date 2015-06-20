@@ -1,3 +1,5 @@
+# rubocop:disable Metrics/AbcSize
+
 require_relative 'test_helper'
 
 class TestLaunchConfiguration < Minitest::Test
@@ -13,7 +15,7 @@ echo ehlo
 EOF
   end
 
-  def test_can_define_launch_configuration_metadata
+  def test_can_create_launch_configuration
     lc = LaunchConfiguration.new(name: name,
                                  ami: ami,
                                  instance_type: instance_type,

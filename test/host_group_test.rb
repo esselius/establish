@@ -9,9 +9,9 @@ class TestHostGroup < Minitest::Test
                                   instance_type: 'c4.large')
 
     @asg = AutoScalingGroup.new(name: '123',
-                                minimum: 1,
-                                desired: 2,
-                                maximum: 3)
+                                minimum: 1, desired: 2, maximum: 3,
+                                launch_configuration: '123-lc',
+                                tags: { asd: 'test' })
   end
 
   def test_can_bootstrap_host_group
