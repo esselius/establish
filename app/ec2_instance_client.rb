@@ -16,14 +16,12 @@ class Ec2InstanceClient
 
   private
 
-  def reservations(filters)
-    client.describe_instances(
+  def instances(filters)
+    reservations = client.describe_instances(
       filters: filters
     )[:reservations]
-  end
 
-  def instances(filters)
-    reservations(filters).map do |reservation|
+    reservations.map do |reservation|
       reservation[:instances]
     end.flatten
   end
