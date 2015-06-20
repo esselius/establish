@@ -2,7 +2,7 @@
 
 REPO:=esselius/establish
 TAG:=$(shell git rev-parse --short HEAD)
-IMAGE:="$(REPO):$(TAG)"
+IMAGE:=$(REPO):$(TAG)
 
 ifndef CIRCLECI
 BUILD_RM:=--force-rm
@@ -10,7 +10,7 @@ RUN_RM:=--rm
 endif
 
 Gemfile.lock: Gemfile
-	docker run $(RUN_RM) -v $(CURDIR):/app ruby:2.2 bundle --gemfile /app/Gemfile
+	docker run $(RUN_RM) -v $(CURDIR):/app ruby:2.2 bundle package --all --gemfile /app/Gemfile
 
 bundle: Gemfile.lock
 
@@ -32,7 +32,7 @@ login: $(HOME)/.dockercfg
 build: bundle
 	docker build $(BUILD_RM) -t $(IMAGE) .
 
-push: build
+push: build test
 	docker push $(IMAGE)
 
 deploy: login push
@@ -44,3 +44,6 @@ test-style: build
 	docker run $(RUN_RM) --net=none -t $(IMAGE) test-style
 
 test-full: test test-style
+
+clean:
+	docker rmi -f $$(docker images -q $(REPO))
