@@ -23,6 +23,8 @@ GEM
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     minitest (5.7.0)
+    minitest-rg (5.1.0)
+      minitest (~> 5.0)
     multi_json (1.11.1)
     parser (2.3.0.pre.2)
       ast (>= 1.1, < 3.0)
@@ -44,4 +46,5 @@ DEPENDENCIES
   aws-sdk
   concord
   minitest
+  minitest-rg
   rubocop

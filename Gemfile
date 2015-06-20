@@ -4,5 +4,6 @@ gem 'concord'
 
 gem 'aws-sdk'
 
-gem 'minitest', require: false
+gem 'minitest'
+gem 'minitest-rg'
 gem 'rubocop', require: false
