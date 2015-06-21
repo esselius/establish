@@ -16,9 +16,18 @@ class Ec2InstanceClient
 
   private
 
+  def filter_defaults
+    [
+      {
+        name: 'instance-state-name',
+        values: ['running']
+      }
+    ]
+  end
+
   def instances(filters)
     reservations = client.describe_instances(
-      filters: filters
+      filters: filter_defaults + filters
     )[:reservations]
 
     reservations.map do |reservation|
